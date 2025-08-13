@@ -4,8 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Liveability Web-based Map</title>
+    <link rel="stylesheet" href="/Frontend/styles.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+      
+
 </head>
 <body>
-    <h1>Testing page</h1>
+    <header>
+      <p id="work">Page under construction @ Group 2</p>
+      
+    <nav class="navbar">
+      <h1>GAMA Liveability Indicators</h1>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Indicators</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <h2>What is Liveability?</h2>
+      <p>
+        Liveability refers to the quality of life experienced by people living in urban areas. 
+        Key indicators include access to health care, green spaces, education, transport, and clean air.
+      </p>
+    </section>
+
+    <section id="map-container">
+      <h2>Study Area</h2>
+      <div id="map"></div>
+
+    </section>
+
+    <section class="grid">
+      <div class="card">Health</div>
+      <div class="card">Education</div>
+      <div class="card">Transport</div>
+      <div class="card">Air Quality</div>
+      <div class="card">Green Spaces</div>
+      <div class="card">Safety</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Urban Liveability App. All rights reserved.</p>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
 </body>
 </html>

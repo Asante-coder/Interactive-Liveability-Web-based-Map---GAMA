@@ -17,7 +17,7 @@ var basemaps = {
     }),
 
 
-Accra_districts: L.tileLayer.wms('http://localhost:8080/geoserver/accra_distict/wms', {
+Accra_districts: L.tileLayer.wms('https://756e6211cd1c.ngrok-free.app/geoserver/accra_distict/wms', {
   layers: 'accra_distict:Accra_districts',
   format: 'image/png',
   transparent: true,  // Enable transparency (optional)

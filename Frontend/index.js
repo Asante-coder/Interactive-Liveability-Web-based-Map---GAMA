@@ -25,11 +25,50 @@ Health_KDE: L.tileLayer.wms('https://03d015978db5.ngrok-free.app/geoserver/gama_
   crs: L.CRS.EPSG4326,  // Match the SRS in your WMS (EPSG:4326)
   attribution: 'Authors',
   styles: 'kde_health'
-})
+}),
+
+Health_facilities: L.tileLayer.wms('https://03d015978db5.ngrok-free.app/geoserver/gama_project/wms', {
+  layers: 'gama_project:Health Facilities',
+  format: 'image/png',
+  transparent: true,  // Enable transparency (optional)
+  version: '1.1.0',
+  crs: L.CRS.EPSG4326,  // Match the SRS in your WMS (EPSG:4326)
+  attribution: 'Authors',
+ 
+}),
+
+GAMA_MAP: L.tileLayer.wms('https://03d015978db5.ngrok-free.app/geoserver/gama_project/wms', {
+  layers: 'gama_project:GAMA_Map',
+  format: 'image/png',
+  transparent: true,  // Enable transparency (optional)
+  version: '1.1.0',
+  crs: L.CRS.EPSG4326,  // Match the SRS in your WMS (EPSG:4326)
+  attribution: 'Authors',
+ 
+}),
+
+GAMA_Boundaries: L.tileLayer.wms('https://03d015978db5.ngrok-free.app/geoserver/gama_project/wms', {
+  layers: 'gama_project:GAMA_Boundaries',
+  format: 'image/png',
+  transparent: true,  // Enable transparency (optional)
+  version: '1.1.0',
+  crs: L.CRS.EPSG4326,  // Match the SRS in your WMS (EPSG:4326)
+  attribution: 'Authors',
+ 
+}),
+'GAMA Boundary, then Health Facilities': L.tileLayer.wms('https://03d015978db5.ngrok-free.app/geoserver/gama_project/wms', {
+  layers: 'GAMA_Boundaries,Health Facilities',
+  format: 'image/png',
+  transparent: true,  // Enable transparency (optional)
+  version: '1.1.0',
+  crs: L.CRS.EPSG4326,  // Match the SRS in your WMS (EPSG:4326)
+  attribution: 'Authors',
+    }),
+
 
 };
 
-http://localhost:8080/geoserver/gama_project/wms?service=WMS&version=1.1.0&request=GetMap&layers=gama_project%3Agama_health_3&bbox=-0.5202026369999544%2C5.469726562000062%2C0.0737036130000456%2C5.879882812000062&width=768&height=530&srs=EPSG%3A4326&styles=&format=application/openlayers
+
 
 
 L.control.layers(basemaps).addTo(map);

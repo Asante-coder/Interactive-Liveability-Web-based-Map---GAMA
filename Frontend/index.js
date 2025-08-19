@@ -6,7 +6,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
 
-L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'gama_project:GAMA_Map',
   format: 'image/png',
   transparent: true,  
@@ -43,7 +43,7 @@ marker.bindPopup("Oyibi").openPopup();
 
 var basemaps = {
   
-'Health_Density': L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+'Health_Density': L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'gama_health_3',
   format: 'image/png',
   transparent: true,  
@@ -53,7 +53,7 @@ var basemaps = {
   styles: 'kde_health'
 }),
 
-"Health_facilities": L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+"Health_facilities": L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'gama_project:Health Facilities',
   format: 'image/png',
   transparent: true,  
@@ -63,7 +63,7 @@ var basemaps = {
  
 }),
 
-GAMA_MAP: L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+GAMA_MAP: L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'gama_project:GAMA_Map',
   format: 'image/png',
   transparent: true,  
@@ -73,7 +73,7 @@ GAMA_MAP: L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_pr
  
 }),
 
-GAMA_Boundaries: L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+GAMA_Boundaries: L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'gama_project:GAMA_Boundaries',
   format: 'image/png',
   transparent: true,  
@@ -82,7 +82,7 @@ GAMA_Boundaries: L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/
   attribution: 'Authors',
  
 }),
-'GAMA Boundary, then Health Facilities': L.tileLayer.wms('https://235796024aff.ngrok-free.app/geoserver/gama_project/wms', {
+'GAMA Boundary, then Health Facilities': L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
   layers: 'GAMA_Boundaries,Health Facilities',
   format: 'image/png',
   transparent: true,  

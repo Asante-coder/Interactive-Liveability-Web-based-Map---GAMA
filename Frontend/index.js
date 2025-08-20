@@ -152,7 +152,22 @@ function loadGeoJSON(name, filePath, options) {
     .catch(err => console.error(`Error loading ${name}:`, err));
 }
 
-loadGeoJSON("GAMA Map", "data/gama_gmap.geojson", { color: "orange" });
+loadGeoJSON("GAMA Map", "data/gama_gmap.geojson", { 
+   style: {
+    color: "orange",
+    weight: 2,
+    fillOpacity: 0.4
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      // Show district name on hover
+      layer.bindTooltip(
+        `District: ${feature.properties.ADM2_EN|| "N/A"}`,
+        { permanent: false, direction: "top" }
+      );
+    }
+  }  
+});
 loadGeoJSON("GAMA Health", "data/health_facilities_gama.geojson", { 
   pointToLayer: function (feature, latlng) {
     return L.circleMarker(latlng, {
@@ -191,3 +206,4 @@ loadGeoJSON("GAMA Schools", "data/schools_gama.geojson", {
   }
 
 });
+

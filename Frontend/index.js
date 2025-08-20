@@ -95,7 +95,7 @@ GAMA_Boundaries: L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/
 
 
 
-L.control.layers(basemaps).addTo(map);
+// L.control.layers(basemaps).addTo(map);
 
 
 
@@ -109,3 +109,33 @@ L.control.scale({
 }).addTo(map);
 
 
+// =====================
+// Containers for layers
+// =====================
+var gama_map = {};
+
+
+
+// =====================
+// Overlay Layers Holder
+// =====================
+var overlayMaps = {};
+
+
+
+
+// =====================
+// Load GeoJSON Files
+// =====================
+fetch('data\Gama_geojson\gama_gmap.geojson')
+    .then(res => res.json())
+    .then(data => {
+        healthLayers["GAMA Map"] = L.geoJSON(data, {
+            style: { color: "orange" }
+        });
+        overlayMaps["GAMA Map"] = healthLayers["GAMA Map"];
+        layerControl.addOverlay(healthLayers["GAMA Map"], "GAMA Map");
+    });
+
+
+    L.control.layers(overlayMaps).addTo(map);

@@ -140,16 +140,54 @@ var overlayMaps = {
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
-function loadGeoJSON(name, filePath, styleOptions) {
+function loadGeoJSON(name, filePath, options) {
   fetch(filePath)
     .then(res => res.json())
     .then(data => {
-      var layer = L.geoJSON(data, { style: styleOptions });
-      overlayMaps[name] = layer;                      // store in overlays
-      layerControl.addOverlay(layer, name);           // add to control
-      // layer.addTo(map); // <- uncomment if you want it visible by default
+      var layer = L.geoJSON(data, options);
+      overlayMaps[name] = layer;                      
+      layerControl.addOverlay(layer, name);           
+      
     })
     .catch(err => console.error(`Error loading ${name}:`, err));
 }
 
 loadGeoJSON("GAMA Map", "data/gama_gmap.geojson", { color: "orange" });
+loadGeoJSON("GAMA Health", "data/health_facilities_gama.geojson", { 
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 2,
+      fillColor: "red",
+      color: "darkred",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+  }
+
+});
+loadGeoJSON("GAMA Schools", "data/schools_gama.geojson", { 
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 2,
+      fillColor: "green",
+      color: "darkred",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+  });
+}
+});
+  loadGeoJSON("GAMA Transport", "data/gama_transport.geojson", { 
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 2,
+      fillColor: "black",
+      color: "darkred",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+  }
+
+});

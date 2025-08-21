@@ -1,5 +1,44 @@
 var map = L.map('map').setView([5.675362, -0.210071], 10);
 
+
+// ********
+// Linear measurement
+
+// *********
+L.control.ruler().addTo(map);
+
+
+
+// ********
+// Draw interactions
+
+// *********
+map.pm.addControls({
+        position: 'bottomright',
+        editControls: false
+    });
+
+var drawnItems = new L.FeatureGroup().addTo(map);
+    map.on("pm:create", function (e) {
+        var type = e.shape,
+            layer = e.layer;
+
+        if (type === 'Marker') {
+            layer.bindPopup('A popup!');
+        }
+
+        drawnItems.addLayer(layer);
+    });
+
+map.on('pm:remove', function(e) {
+        console.log('Layer removed:', e.layer);
+    });
+
+    map.on('pm:globaleditmodetoggled', function(e) {
+        console.log('Edit mode toggled:', e.enabled);
+    });
+
+
 //Basemap OSM and Study Area
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -10,33 +49,6 @@ var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
     maxZoom: 19,
     attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
 
-// L.tileLayer.wms('https://36a327b79c02.ngrok-free.app/geoserver/gama_project/wms', {
-//   layers: 'gama_project:GAMA_Map',
-//   format: 'image/png',
-//   transparent: true,  
-//   version: '1.1.0',
-//   crs: L.CRS.EPSG4326, 
-//   attribution: 'Authors',
-// }).addTo(map)
-
-// var marker = L.marker([5.650999, -0.183458]).addTo(map);
-// marker.bindPopup("<b>Department of Geography & Resource Development</b><br>University of Ghana.").openPopup();
-
-// var marker = L.marker([5.551150, -0.204982]).addTo(map);
-// marker.bindPopup("Accra Cental").openPopup();
-
-
-// var marker = L.marker([5.645210, -0.001596]).addTo(map);
-// marker.bindPopup("<b>Tema</b><br>Community 1").openPopup();
-
-// var marker = L.marker([5.564385, -0.332169]).addTo(map);
-// marker.bindPopup("Weija").openPopup();
-
-// var marker = L.marker([5.705493, -0.301719]).addTo(map);
-// marker.bindPopup("Amasaman").openPopup();
-
-// var marker = L.marker([5.813361, -0.119713]).addTo(map);
-// marker.bindPopup("Oyibi").openPopup();
 
 var ug = L.marker([5.650999, -0.183458]).bindPopup('<b>Department of Geography & Resource Development</b><br>University of Ghana..'),
     accra    = L.marker([5.551150, -0.204982]).bindPopup('Accra Cental.'),
@@ -46,7 +58,7 @@ var ug = L.marker([5.650999, -0.183458]).bindPopup('<b>Department of Geography &
 
 var places = L.layerGroup([ug, accra, tema, weija, oyibi]);
 
-
+new L.Control.Geocoder().addTo(map);
 
 // =========================
 // Indicators & Layers
@@ -158,7 +170,8 @@ loadGeoJSON("GAMA Map", "data/gama_gmap.geojson", {
     weight: 2,
     fillOpacity: 0.4
   },
-  onEachFeature: function (feature, layer) {
+  
+onEachFeature: function (feature, layer) {
     if (feature.properties) {
       // Show district name on hover
       layer.bindTooltip(
@@ -167,7 +180,7 @@ loadGeoJSON("GAMA Map", "data/gama_gmap.geojson", {
       );
     }
   }  
-});
+});  
 loadGeoJSON("GAMA Health", "data/health_facilities_gama.geojson", { 
   pointToLayer: function (feature, latlng) {
     return L.circleMarker(latlng, {
@@ -178,9 +191,20 @@ loadGeoJSON("GAMA Health", "data/health_facilities_gama.geojson", {
       opacity: 1,
       fillOpacity: 0.8
     });
-  }
+  },
 
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      // Show district name on hover
+      layer.bindTooltip(
+        `Name: ${feature.properties.NAME || "N/A"}<br> 
+        Type: ${feature.properties.UnitTypeNa || "N/A"}`,
+        { permanent: false, direction: "top", cursor:"pointer" }
+      );
+    }
+  }  
 });
+
 loadGeoJSON("GAMA Schools", "data/schools_gama.geojson", { 
   pointToLayer: function (feature, latlng) {
     return L.circleMarker(latlng, {
@@ -191,19 +215,30 @@ loadGeoJSON("GAMA Schools", "data/schools_gama.geojson", {
       opacity: 1,
       fillOpacity: 0.8
   });
-}
+},
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      // Show district name on hover
+      layer.bindTooltip(
+        `Name: ${feature.properties.name || "N/A"}<br> 
+        Type: ${feature.properties.amenty || "N/A"}`,
+        { permanent: false, direction: "top" }
+      );
+    }
+  } 
 });
-  loadGeoJSON("GAMA Transport", "data/gama_transport.geojson", { 
-  pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng, {
-      radius: 2,
-      fillColor: "black",
-      color: "darkred",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 0.8
-    });
-  }
+//   loadGeoJSON("GAMA Transport", "data/gama_transport.geojson", { 
+//   pointToLayer: function (feature, latlng) {
+//     return L.circleMarker(latlng, {
+//       radius: 2,
+//       fillColor: "black",
+//       color: "darkred",
+//       weight: 1,
+//       opacity: 1,
+//       fillOpacity: 0.8
+//     });
+//   }
+// });
 
-});
+
 

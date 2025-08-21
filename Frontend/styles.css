@@ -94,3 +94,9 @@ footer {
   color: white;
   font-weight: bold;
 }
+
+
+.my-tooltip{
+  background-color: #d48713;
+  cursor:crosshair;
+}
